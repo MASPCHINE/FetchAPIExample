@@ -1,0 +1,26 @@
+#orangeRed,
+#deepPink,
+#aliceBlue {
+  padding: 15px;
+  margin: 5px;
+  display: inline-block;
+  width:auto;
+  height: auto;
+  
+  
+}
+
+#orangeRed {
+  border: 3px solid red;
+  box-sizing: 33%;
+}
+#deepPink {
+  border: 3px solid rgb(207, 18, 163);
+
+
+}
+#aliceBlue {
+  border: 3px solid blue;
+
+
+}
