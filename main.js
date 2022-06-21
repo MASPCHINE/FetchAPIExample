@@ -1,88 +1,40 @@
-var orangeRed = [];
-var deepPink = [];
-var aliceBlue = [];
-
-function getJson() {
-  fetch("data.json")
+//JSON Dosyası Icerisini Okuma
+let readFile = async function (groupTag, name) {
+  let data = await fetch("data.json")
     .then((response) => {
       return response.json();
     })
-    .then((user) => {
-      var o = "Group Name : OrangeRed <br>";
-      var a = "Group Name : AliceBlue <br>";
-      var d = "Group Name : DeepPink <br>";
-
-      user.forEach((element) => {
-        if (element.group == "OrangeRed") {
-          orangeRed.push(element);
-          o += `
-        <br>
-        <div>
-            ${element.id} -
-            ${element.name} 
-        </div>
-        <hr>
-        ` 
-          if(element.assistant){
-           o += `
-           <br>
-           <div>
-           Group assistant : 
-               ${element.name} 
-           </div>
-           <hr>
-           ` 
-          }
-        ;
-        
-        } else if (element.group == "DeepPink") {
-          deepPink.push(element);
-          d += `
-        <br>
-        <div>
-            ${element.id} -
-            ${element.name} 
-        </div>
-        <hr>
-
-        `
-        if(element.assistant){
-          d += `
-          <br>
-          <div>
-          Group assistant : 
-              ${element.name} 
-          </div>
-          <hr>
-          ` 
-         };
-        } else {
-          aliceBlue.push(element);
-          a += `
-        <br>
-        <div>
-            ${element.id} -
-            ${element.name} 
-        </div>
-        <hr>
-
-        `
-        if(element.assistant){
-          a += `
-          <br>
-          <div>
-          Group assistant : 
-              ${element.name} 
-          </div>
-          <hr>
-          ` 
-         };
-        }
-      });
-      document.querySelector("#orangeRed").innerHTML = o;
-      document.querySelector("#deepPink").innerHTML = d;
-      document.querySelector("#aliceBlue").innerHTML = a;
+    .then((item) => {
+      return item;
     });
-}
 
-getJson();
+  getGroup(data, groupTag);
+  getGroupTagAssistant(data, name);
+  getGroupForAssistant(data);
+};
+
+// Gönderilen Grupta Olan Üyeler
+let getGroup = function (data, groupTag) {
+  data.forEach((members) => {
+    if (members.group == groupTag) {
+      console.log(members);
+    }
+  });
+};
+
+//Gönderdiğimiz Assistanin Gruoup Adini Öğrenmek
+let getGroupTagAssistant = function (data, name) {
+  data.forEach((members) => {
+    if (members.name == name && members.assistant) {
+      return (assistantGroupTag = members.group);
+    }
+  });
+  getGroupForAssistant("", assistantGroupTag);
+};
+
+//Asistanin Grup Adina Göre Üyeleri Siralama
+let getGroupForAssistant = function (data, assistantGroupTag) {
+  //Warning
+};
+
+readFile("OrangeRed", "Mehmet");
