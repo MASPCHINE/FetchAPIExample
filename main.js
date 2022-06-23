@@ -10,31 +10,34 @@ let readFile = async function (groupTag, name) {
 
   getGroup(data, groupTag);
   getGroupTagAssistant(data, name);
-  getGroupForAssistant(data);
 };
 
 // Gönderilen Grupta Olan Üyeler
 let getGroup = function (data, groupTag) {
   data.forEach((members) => {
     if (members.group == groupTag) {
-      console.log(members);
+      //console.log(members);
     }
   });
 };
 
-//Gönderdiğimiz Assistanin Gruoup Adini Öğrenmek
+//Gönderdiğimiz Assistanin Grup Adini Öğrenmek
 let getGroupTagAssistant = function (data, name) {
   data.forEach((members) => {
     if (members.name == name && members.assistant) {
       return (assistantGroupTag = members.group);
     }
   });
-  getGroupForAssistant("", assistantGroupTag);
+  getGroupForAssistant(data, assistantGroupTag);
 };
 
 //Asistanin Grup Adina Göre Üyeleri Siralama
 let getGroupForAssistant = function (data, assistantGroupTag) {
-  //Warning
+  data.forEach((members) => {
+    if (members.group == assistantGroupTag) {
+      console.log(members);
+    }
+  });
 };
 
-readFile("OrangeRed", "Mehmet");
+readFile("OrangeRed", "Derya");
